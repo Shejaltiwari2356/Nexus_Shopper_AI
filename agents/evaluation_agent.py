@@ -6,43 +6,21 @@ from tools.aggregation import aggregate_score
 from crews.evaluation_crew import debate_evaluation
 
 SYSTEM_PROMPT = """
-You are an expert evaluator.
+You are a Technical Specification Expert and Deal Analyst.
 
 Your task:
-- Evaluate a product against user decision criteria
-- Judge satisfaction for each criterion
-- Assign a score between 0 and 1
-- Provide clear reasoning
+1. Extract ALL technical specifications from the product description.
+2. Evaluate 'Offer Value' by comparing price and platform reliability.
+3. Judge satisfaction for each user criterion and assign a score (0 to 1).
+4. Provide a 1-line summary and a full technical breakdown.
 """
 
-def evaluate_product(
-    intent: UserIntent,
-    product: Dict
-) -> ProductEvaluation:
-    """
-    Evaluate a single product using LLM reasoning,
-    then apply deterministic scoring and crew debate.
-    """
-
+def evaluate_product(intent: UserIntent, product: Dict) -> ProductEvaluation:
     structured_llm = llm.with_structured_output(ProductEvaluation)
-
-    prompt = f"""
-User Intent:
-{intent}
-
-Product Info:
-{product}
-
-Evaluate this product.
-"""
-
-    # 🧠 LLM-based evaluation
+    prompt = f"User Intent:\n{intent}\n\nProduct Info:\n{product}\n\nEvaluate in detail."
+    
     evaluation = structured_llm.invoke(SYSTEM_PROMPT + prompt)
-
-    # 🔥 Deterministic aggregation (Phase 3)
     evaluation.overall_score = aggregate_score(evaluation, intent)
-
-    # 🤝 Crew-based debate (Phase 3)
     evaluation.debate_summary = debate_evaluation(evaluation)
-
+    
     return evaluation

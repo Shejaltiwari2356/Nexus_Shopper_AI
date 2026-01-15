@@ -1,0 +1,97 @@
+# ===============================
+# Python
+# ===============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+
+# Virtual environments
+venv/
+.env/
+.env.*
+.venv/
+ENV/
+env/
+
+# ===============================
+# IDE / Editor
+# ===============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# ===============================
+# OS files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Logs
+# ===============================
+*.log
+logs/
+
+# ===============================
+# API keys / secrets
+# ===============================
+.env
+.env.local
+.env.production
+.env.dev
+
+# ===============================
+# LangGraph / LangChain
+# ===============================
+.langgraph/
+.checkpoints/
+
+# ===============================
+# Vector DB / Memory
+# ===============================
+chroma/
+chromadb/
+vector_store/
+*.db
+
+# ===============================
+# Streamlit
+# ===============================
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# ===============================
+# Test artifacts
+# ===============================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===============================
+# Build / Distribution
+# ===============================
+build/
+dist/
+*.egg-info/
+
+# ===============================
+# Jupyter (if used)
+# ===============================
+.ipynb_checkpoints/
+
+# ===============================
+# Temporary files
+# ===============================
+tmp/
+temp/
+.cache/
+
+# ===============================
+# Local config overrides
+# ===============================
+settings.local.py
